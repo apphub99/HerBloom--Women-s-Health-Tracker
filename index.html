@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HerBloom – Women’s Health & Reproductive Lifecycle Suite</title>
+    <style>
+        /* Scoped Styles for HerBloom WordPress Integration */
+        #herbloom-womens-health {
+            --hb-primary: #d81b60; /* Deep Rose / Pink */
+            --hb-primary-dark: #ad1457; /* Darker Rose */
+            --hb-secondary: #880e4f; /* Rich Berry */
+            --hb-bg: #fff5f8; /* Soft Pinkish Background */
+            --hb-card-bg: #ffffff;
+            --hb-text: #2d2d2d;
+            --hb-text-light: #666666;
+            --hb-border: #f8bbd0; /* Soft Pink Border */
+            --hb-error: #c62828;
+            --hb-success: #2e7d32;
+            --hb-warning: #e65100;
+            
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            color: var(--hb-text);
+            background-color: var(--hb-bg);
+            margin: 0;
+            padding: 16px;
+            box-sizing: border-box;
+            line-height: 1.6;
+            font-size: 16px;
+        }
+
+        #herbloom-womens-health *, #herbloom-womens-health *::before, #herbloom-womens-health *::after {
+            box-sizing: inherit;
+        }
+
+        #herbloom-womens-health .hb-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        /* Header */
+        #herbloom-womens-health .hb-header {
+            background: linear-gradient(135deg, var(--hb-secondary), var(--hb-primary));
+            color: #ffffff;
+            padding: 32px 24px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 24px;
+            box-shadow: 0 4px 16px rgba(216, 27, 96, 0.15);
+        }
+
+        #herbloom-womens-health .hb-header h1 {
+            margin: 0 0 4px 0;
+            font-size: 34px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        #herbloom-womens-health .hb-header h2 {
+            margin: 0 0 6px 0;
+            font-size: 20px;
+            font-weight: 600;
+            color: #fce4ec;
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        #herbloom-womens-health .hb-header .hb-brand-sub {
+            margin: 0 0 12px 0;
+            font-size: 14px;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #f8bbd0;
+            font-weight: 500;
+        }
+
+        #herbloom-womens-health .hb-header p {
+            margin: 0;
+            font-size: 16px;
+            opacity: 0.95;
+            font-style: italic;
+        }
+
+        /* Module Navigation Tabs */
+        #herbloom-womens-health .hb-nav-tabs {
+            display: flex;
+            gap: 8px;
+            overflow-x: auto;
+            margin-bottom: 20px;
+            padding-bottom: 4px;
+        }
+
+        #herbloom-womens-health .hb-tab-btn {
+            background: #f8bbd0;
+            color: var(--hb-secondary);
+            border: none;
+            padding: 10px 16px;
+            font-size: 14px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s;
+        }
+
+        #herbloom-womens-health .hb-tab-btn.active {
+            background: var(--hb-secondary);
+            color: #fff;
+        }
+
+        /* Cards & Layout */
+        #herbloom-womens-health .hb-card {
+            background: var(--hb-card-bg);
+            border-radius: 10px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(216, 27, 96, 0.05);
+            border: 1px solid var(--hb-border);
+            display: none;
+        }
+
+        #herbloom-womens-health .hb-card.active-module {
+            display: block;
+        }
+
+        #herbloom-womens-health h3 {
+            color: var(--hb-secondary);
+            font-size: 22px;
+            margin-top: 0;
+            margin-bottom: 18px;
+            border-bottom: 2px solid #fce4ec;
+            padding-bottom: 8px;
+        }
+
+        #herbloom-womens-health h4 {
+            color: var(--hb-primary-dark);
+            font-size: 18px;
+            margin-top: 20px;
+            margin-bottom: 12px;
+        }
+
+        /* Form Controls */
+        #herbloom-womens-health .hb-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+            gap: 18px;
+        }
+
+        #herbloom-womens-health .hb-form-group {
+            margin-bottom: 14px;
+        }
+
+        #herbloom-womens-health label {
+            display: block;
+            font-weight: 600;
+            font-size: 15px;
+            margin-bottom: 6px;
+            color: var(--hb-secondary);
+        }
+
+        #herbloom-womens-health input[type="date"],
+        #herbloom-womens-health input[type="number"],
+        #herbloom-womens-health input[type="text"],
+        #herbloom-womens-health select {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid var(--hb-border);
+            border-radius: 6px;
+            font-size: 16px;
+            background: #fff;
+            color: var(--hb-text);
+        }
+
+        #herbloom-womens-health input:focus,
+        #herbloom-womens-health select:focus {
+            outline: none;
+            border-color: var(--hb-primary);
+            box-shadow: 0 0 0 3px rgba(216, 27, 96, 0.15);
+        }
+
+        /* Checkbox Group */
+        #herbloom-womens-health .hb-checkbox-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 10px;
+            margin-top: 8px;
+        }
+
+        #herbloom-womens-health .hb-checkbox-label {
+            font-weight: normal;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            cursor: pointer;
+            font-size: 15px;
+        }
+
+        /* Buttons */
+        #herbloom-womens-health .hb-btn-container {
+            display: flex;
+            gap: 12px;
+            margin-top: 24px;
+            flex-wrap: wrap;
+        }
+
+        #herbloom-womens-health .hb-btn {
+            background: var(--hb-primary);
+            color: white;
+            border: none;
+            padding: 14px 26px;
+            font-size: 16px;
+            font-weight: 600;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        #herbloom-womens-health .hb-btn:hover {
+            background: var(--hb-primary-dark);
+        }
+
+        /* Summary Output Cards */
+        #herbloom-womens-health .hb-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+            gap: 18px;
+            margin-top: 20px;
+        }
+
+        #herbloom-womens-health .hb-metric-card {
+            background: #fff0f3;
+            border: 1px solid var(--hb-border);
+            border-radius: 8px;
+            padding: 18px;
+            text-align: center;
+        }
+
+        #herbloom-womens-health .hb-metric-card .value {
+            font-size: 22px;
+            font-weight: 700;
+            color: var(--hb-secondary);
+            margin: 8px 0;
+        }
+
+        #herbloom-womens-health .hb-metric-card .label {
+            font-size: 13px;
+            color: var(--hb-text-light);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 600;
+        }
+
+        /* References Section */
+        #herbloom-womens-health .hb-references {
+            background: #ffffff;
+            border: 1px solid var(--hb-border);
+            border-radius: 10px;
+            padding: 20px;
+            margin-top: 24px;
+        }
+
+        #herbloom-womens-health .hb-references h4 {
+            color: var(--hb-secondary);
+            margin-top: 0;
+            font-size: 18px;
+        }
+
+        #herbloom-womens-health .hb-references ul {
+            margin: 0;
+            padding-left: 20px;
+            font-size: 14px;
+            color: var(--hb-text-light);
+            line-height: 1.6;
+        }
+
+        #herbloom-womens-health .hb-references a {
+            color: var(--hb-primary);
+            text-decoration: underline;
+        }
+
+        /* Disclaimer & Footer */
+        #herbloom-womens-health .hb-disclaimer {
+            background: #fff8e1;
+            border: 1px solid #ffe082;
+            border-left: 4px solid var(--hb-warning);
+            padding: 18px;
+            border-radius: 6px;
+            font-size: 14px;
+            margin-top: 20px;
+            color: #5d4037;
+        }
+
+        #herbloom-womens-health .hb-footer {
+            text-align: center;
+            margin-top: 24px;
+            font-size: 14px;
+            color: var(--hb-text-light);
+            border-top: 1px solid var(--hb-border);
+            padding-top: 18px;
+        }
+
+        /* Print styles */
+        @media print {
+            body { background: #fff !important; }
+            #herbloom-womens-health { padding: 0; }
+            #herbloom-womens-health .hb-card { box-shadow: none; border: 1px solid #ccc; display: block !important; }
+            #herbloom-womens-health .hb-nav-tabs, #herbloom-womens-health .hb-btn-container { display: none !important; }
+        }
+    </style>
+</head>
+<body>
+
+<div id="herbloom-womens-health">
+    <div class="hb-container">
+        
+        <!-- Header -->
+        <div class="hb-header">
+            <h1>HerBloom</h1>
+            <div class="hb-brand-sub">Pharma Basic</div>
+            <h2>Women’s Health & Reproductive Lifecycle Suite</h2>
+            <p>Your Health. Your Journey. Your Bloom.</p>
+        </div>
+
+        <!-- Module Navigation Tabs -->
+        <div class="hb-nav-tabs">
+            <button class="hb-tab-btn active" onclick="switchModule(1)">1. Menstrual Tracker</button>
+            <button class="hb-tab-btn" onclick="switchModule(2)">2. Ovulation & Fertility</button>
+            <button class="hb-tab-btn" onclick="switchModule(3)">3. Pregnancy Tracker</button>
+            <button class="hb-tab-btn" onclick="switchModule(4)">4. Delivery Preparation</button>
+            <button class="hb-tab-btn" onclick="switchModule(5)">5. Postpartum & Newborn</button>
+            <button class="hb-tab-btn" onclick="switchModule(6)">6. Menopause Health</button>
+        </div>
+
+        <!-- MODULE 1: Menstrual Cycle Tracker -->
+        <div class="hb-card active-module" id="module-1">
+            <h3>1. Menstrual Cycle Tracker & Symptom Log</h3>
+            <div class="hb-grid">
+                <div class="hb-form-group">
+                    <label for="m-age">Age (Years)</label>
+                    <input type="number" id="m-age" min="10" max="60" value="25">
+                </div>
+                <div class="hb-form-group">
+                    <label for="m-start-date">Last Period Start Date</label>
+                    <input type="date" id="m-start-date">
+                </div>
+                <div class="hb-form-group">
+                    <label for="m-cycle-length">Average Cycle Length (Days)</label>
+                    <input type="number" id="m-cycle-length" min="21" max="45" value="28">
+                </div>
+                <div class="hb-form-group">
+                    <label for="m-period-duration">Period Duration / Bleeding Length (Days)</label>
+                    <input type="number" id="m-period-duration" min="2" max="10" value="5">
+                </div>
+                <div class="hb-form-group">
+                    <label for="m-flow-intensity">Bleeding Intensity</label>
+                    <select id="m-flow-intensity">
+                        <option value="Light">Light</option>
+                        <option value="Moderate" selected>Moderate</option>
+                        <option value="Heavy">Heavy</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="hb-form-group">
+                <label>Recorded Symptoms & Manifestations</label>
+                <div class="hb-checkbox-group">
+                    <label class="hb-checkbox-label"><input type="checkbox" name="m-symptom" value="Cramps"> Cramps / Dysmenorrhea</label>
+                    <label class="hb-checkbox-label"><input type="checkbox" name="m-symptom" value="Headache"> Headaches / Migraine</label>
+                    <label class="hb-checkbox-label"><input type="checkbox" name="m-symptom" value="Acne"> Acne / Skin Breakouts</label>
+                    <label class="hb-checkbox-label"><input type="checkbox" name="m-symptom" value="Mood Swings"> Mood Swings / Irritability</label>
+                    <label class="hb-checkbox-label"><input type="checkbox" name="m-symptom" value="Fatigue"> Low Energy / Fatigue</label>
+                </div>
+            </div>
+
+            <div class="hb-btn-container">
+                <button type="button" class="hb-btn" onclick="calculateMenstrualTracker()">Analyze Cycle & Predict</button>
+            </div>
+
+            <div id="m-results" style="display:none; margin-top: 20px;">
+                <h4>Cycle Analysis & Predictions</h4>
+                <div class="hb-summary-grid">
+                    <div class="hb-metric-card">
+                        <div class="label">Next Period Expected</div>
+                        <div class="value" id="res-next-period">-</div>
+                    </div>
+                    <div class="hb-metric-card">
+                        <div class="label">Clinical Evaluation & Age Note</div>
+                        <div class="value" id="res-cycle-status" style="font-size: 15px;">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 2: Ovulation and Fertility Tracker -->
+        <div class="hb-card" id="module-2">
+            <h3>2. Ovulation & Fertility Assessment</h3>
+            <div class="hb-grid">
+                <div class="hb-form-group">
+                    <label for="ov-age">Age (Years)</label>
+                    <input type="number" id="ov-age" min="18" max="50" value="30">
+                </div>
+                <div class="hb-form-group">
+                    <label for="ov-last-date">Last Period Start Date</label>
+                    <input type="date" id="ov-last-date">
+                </div>
+                <div class="hb-form-group">
+                    <label for="ov-cycle-len">Average Cycle Length (Days)</label>
+                    <input type="number" id="ov-cycle-len" min="21" max="45" value="28">
+                </div>
+                <div class="hb-form-group">
+                    <label for="ov-mucus">Cervical Mucus Observation</label>
+                    <select id="ov-mucus">
+                        <option value="Dry / Sticky">Dry / Sticky</option>
+                        <option value="Creamy">Creamy</option>
+                        <option value="Egg-White / Stretchy" selected>Egg-White / Stretchy (High Fertility)</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="hb-btn-container">
+                <button type="button" class="hb-btn" onclick="calculateFertility()">Calculate Fertile Window</button>
+            </div>
+
+            <div id="ov-results" style="display:none; margin-top: 20px;">
+                <h4>Fertility Estimates & Age Context</h4>
+                <div class="hb-summary-grid">
+                    <div class="hb-metric-card">
+                        <div class="label">Estimated Ovulation Date</div>
+                        <div class="value" id="res-ovulation-date">-</div>
+                    </div>
+                    <div class="hb-metric-card">
+                        <div class="label">Estimated Fertile Window</div>
+                        <div class="value" id="res-fertile-window">-</div>
+                    </div>
+                    <div class="hb-metric-card">
+                        <div class="label">Age-Related Fertility Context</div>
+                        <div class="value" id="res-fertility-age-note" style="font-size: 14px;">-</div>
+                    </div>
+                </div>
+                <p style="font-size: 13px; color: var(--hb-warning); margin-top: 12px;"><strong>Note:</strong> Predictions are estimates for educational tracking and conception planning, not reliable contraception.</p>
+            </div>
+        </div>
+
+        <!-- MODULE 3: Pregnancy Tracker -->
+        <div class="hb-card" id="module-3">
+            <h3>3. Pregnancy & Gestational Tracker</h3>
+            <div class="hb-grid">
+                <div class="hb-form-group">
+                    <label for="p-age">Age (Years)</label>
+                    <input type="number" id="p-age" min="15" max="50" value="30">
+                </div>
+                <div class="hb-form-group">
+                    <label for="p-lmp">Last Menstrual Period (LMP) Date</label>
+                    <input type="date" id="p-lmp">
+                </div>
+                <div class="hb-form-group">
+                    <label for="p-weight">Current Weight (kg)</label>
+                    <input type="number" id="p-weight" min="30" max="250" value="65">
+                </div>
+                <div class="hb-form-group">
+                    <label for="p-bp">Blood Pressure (e.g., 120/80)</label>
+                    <input type="text" id="p-bp" value="120/80">
+                </div>
+            </div>
+
+            <div class="hb-btn-container">
+                <button type="button" class="hb-btn" onclick="calculatePregnancy()">Track Gestational Progress</button>
+            </div>
+
+            <div id="p-results" style="display:none; margin-top: 20px;">
+                <h4>Gestational Status & Clinical Risk Flag</h4>
+                <div class="hb-summary-grid">
+                    <div class="hb-metric-card">
+                        <div class="label">Estimated Due Date (EDD)</div>
+                        <div class="value" id="res-edd">-</div>
+                    </div>
+                    <div class="hb-metric-card">
+                        <div class="label">Current Gestational Age</div>
+                        <div class="value" id="res-gestational-age">-</div>
+                    </div>
+                    <div class="hb-metric-card">
+                        <div class="label">Age-Related Clinical Note</div>
+                        <div class="value" id="res-ama-note" style="font-size: 14px;">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 4: Delivery Date and Birth Preparation -->
+        <div class="hb-card" id="module-4">
+            <h3>4. Delivery Date & Birth Preparation Planner</h3>
+            <div class="hb-grid">
+                <div class="hb-form-group">
+                    <label for="d-edd">Confirmed Due Date (EDD)</label>
+                    <input type="date" id="d-edd">
+                </div>
+                <div class="hb-form-group">
+                    <label for="d-hospital">Hospital / Birth Center Name</label>
+                    <input type="text" id="d-hospital" placeholder="City General Hospital">
+                </div>
+                <div class="hb-form-group">
+                    <label for="d-doctor">Obstetrician / Care Provider</label>
+                    <input type="text" id="d-doctor" placeholder="Dr. Jane Smith">
+                </div>
+                <div class="hb-form-group">
+                    <label for="d-contact">Emergency Contact Phone</label>
+                    <input type="text" id="d-contact" placeholder="+1 (555) 019-2834">
+                </div>
+            </div>
+
+            <div class="hb-btn-container">
+                <button type="button" class="hb-btn" onclick="generateBirthPlan()">Generate Countdown & Checklist</button>
+            </div>
+
+            <div id="d-results" style="display:none; margin-top: 20px;">
+                <h4>Birth Preparation Dashboard</h4>
+                <div class="hb-summary-grid">
+                    <div class="hb-metric-card">
+                        <div class="label">Countdown to Delivery</div>
+                        <div class="value" id="res-countdown">-</div>
+                    </div>
+                </div>
+                <h4 style="margin-top: 20px;">Essential Hospital Bag Checklist</h4>
+                <ul style="font-size: 15px; line-height: 1.8;">
+                    <li>✔ Government ID, insurance cards, and birth plan documents.</li>
+                    <li>✔ Comfortable loose clothing, nursing bras, and going-home outfit for baby.</li>
+                    <li>✔ Toiletries, lip balm, hair ties, and maternity pads.</li>
+                    <li>✔ Infant car seat installed and tested in vehicle.</li>
+                </ul>
+            </div>
+        </div>
+
+        <!-- MODULE 5: Postpartum and Newborn Care Tracker -->
+        <div class="hb-card" id="module-5">
+            <h3>5. Postpartum & Newborn Care Tracker</h3>
+            <div class="hb-grid">
+                <div class="hb-form-group">
+                    <label for="post-delivery-date">Baby's Birth Date</label>
+                    <input type="date" id="post-delivery-date">
+                </div>
+                <div class="hb-form-group">
+                    <label for="post-lochia">Maternal Lochia (Bleeding) Status</label>
+                    <select id="post-lochia">
+                        <option value="Rubra (Bright Red, heavy)">Rubra (Bright Red, heavy - Days 1-4)</option>
+                        <option value="Serosa (Pinkish-brown)">Serosa (Pinkish-brown - Days 4-10)</option>
+                        <option value="Alba (Yellowish-white)">Alba (Yellowish-white - Weeks 2-6)</option>
+                    </select>
+                </div>
+                <div class="hb-form-group">
+                    <label for="post-feeding">Feeding Method</label>
+                    <select id="post-feeding">
+                        <option value="Exclusive Breastfeeding">Exclusive Breastfeeding</option>
+                        <option value="Formula Feeding">Formula Feeding</option>
+                        <option value="Combination Feeding">Combination Feeding</option>
+                    </select>
+                </div>
+                <div class="hb-form-group">
+                    <label for="post-baby-weight">Newborn Weight (grams)</label>
+                    <input type="number" id="post-baby-weight" min="1500" max="6000" value="3300">
+                </div>
+            </div>
+
+            <div class="hb-btn-container">
+                <button type="button" class="hb-btn" onclick="calculatePostpartum()">Analyze Postpartum Timeline</button>
+            </div>
+
+            <div id="post-results" style="display:none; margin-top: 20px;">
+                <h4>Postpartum & Neonatal Summary</h4>
+                <div class="hb-summary-grid">
+                    <div class="hb-metric-card">
+                        <div class="label">Time Postpartum</div>
+                        <div class="value" id="res-post-time">-</div>
+                    </div>
+                    <div class="hb-metric-card">
+                        <div class="label">Recommended Care Check</div>
+                        <div class="value" id="res-post-guideline" style="font-size: 15px;">-</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- MODULE 6: Menopause and Hormonal Health Tracker -->
+        <div class="hb-card" id="module-6">
+            <h3>6. Menopause & Hormonal Health Assessment</h3>
+            <div class="hb-grid">
+                <div class="hb-form-group">
+                    <label for="men-age">Current Age (Years)</label>
+                    <input type="number" id="men-age" min="35" max="80" value="50">
+                </div>
+                <div class="hb-form-group">
+                    <label for="men-status">Menstrual Status</label>
+                    <select id="men-status">
+                        <option value="Regular">Regular Cycles</option>
+                        <option value="Perimenopause">Perimenopause (Irregular cycles)</option>
+                        <option value="Menopause">Menopause (No period for 12+ consecutive months)</option>
+                    </select>
+                </div>
+                <div class="hb-form-group">
+                    <label for="men-flashes">Hot Flash Frequency</label>
+                    <select id="men-flashes">
+                        <option value="None">None</option>
+                        <option value="Mild (1-3 times/day)">Mild (1–3 times/day)</option>
+                        <option value="Moderate (4-8 times/day)" selected>Moderate (4–8 times/day)</option>
+                        <option value="Severe (Frequent/Night Sweats)">Severe (Frequent / Severe Night Sweats)</option>
+                    </select>
+                </div>
+                <div class="hb-form-group">
+                    <label for="men-sleep">Sleep Disturbance Level</label>
+                    <select id="men-sleep">
+                        <option value="Normal">Normal Sleep</option>
+                        <option value="Mild Difficulty">Mild Difficulty Falling Asleep</option>
+                        <option value="Frequent Awakenings" selected>Frequent Awakenings / Insomnia</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="hb-btn-container">
+                <button type="button" class="hb-btn" onclick="calculateMenopause()">Evaluate Hormonal Health</button>
+            </div>
+
+            <div id="men-results" style="display:none; margin-top: 20px;">
+                <h4>Hormonal Health Assessment & Bone Education</h4>
+                <div class="hb-summary-grid">
+                    <div class="hb-metric-card">
+                        <div class="label">Life Stage Evaluation</div>
+                        <div class="value" id="res-men-stage">-</div>
+                    </div>
+                    <div class="hb-metric-card">
+                        <div class="label">Bone Health Focus</div>
+                        <div class="value" id="res-bone-focus" style="font-size: 14px;">Calcium & Vitamin D Optimization</div>
+                    </div>
+                </div>
+                <p style="font-size: 14px; margin-top: 15px; color: var(--hb-text-light);">
+                    <strong>Clinical Education:</strong> During perimenopause and postmenopause, declining estrogen levels increase the risk of bone mineral density loss (osteopenia/osteoporosis). Adequate daily intake of elemental calcium (1,200 mg/day for women 50+), Vitamin D3 (800–1000 IU/day), and weight-bearing exercise are strongly recommended.
+                </p>
+            </div>
+        </div>
+
+        <!-- Scientific Reference Sources -->
+        <div class="hb-references">
+            <h4>📚 Scientific References & Authoritative Guidelines</h4>
+            <ul>
+                <li><strong>World Health Organization (WHO):</strong> <a href="https://www.who.int/health-topics/maternal-health" target="_blank">Maternal and Reproductive Health Guidelines</a>.</li>
+                <li><strong>American College of Obstetricians and Gynecologists (ACOG):</strong> <a href="https://www.acog.org/" target="_blank">Clinical Practice Guidelines and Obstetric Care Bulletins</a>.</li>
+                <li><strong>Federation of Obstetric and Gynaecological Societies of India (FOGSI) / ICMR:</strong> <a href="https://www.fogsi.org/" target="_blank">Good Clinical Practice Recommendations in Obstetrics & Gynecology</a>.</li>
+            </ul>
+        </div>
+
+        <!-- Medical Disclaimer -->
+        <div class="hb-disclaimer">
+            <strong>Medical Disclaimer:</strong> "This tool suite is intended for educational and informational purposes only. The calculated tracking estimates, fertility windows, and physiological milestones do not replace professional medical evaluation, gynecological diagnosis, or obstetric care. Individuals experiencing acute symptoms, severe pain, or complications must consult a qualified healthcare provider."
+        </div>
+
+        <!-- Footer -->
+        <div class="hb-footer">
+            &copy; 2026 HerBloom (Pharma Basic). All rights reserved. Powered by clinical medical science and validated reference frameworks.
+        </div>
+
+    </div>
+</div>
+
+<script>
+    /* ==========================================
+        JAVASCRIPT HERBLOOM CALCULATION ENGINE
+        ========================================== */
+
+    function switchModule(moduleNum) {
+        document.querySelectorAll('#herbloom-womens-health .hb-card').forEach(card => card.classList.remove('active-module'));
+        document.querySelectorAll('#herbloom-womens-health .hb-tab-btn').forEach(btn => btn.classList.remove('active'));
+        
+        document.getElementById(`module-${moduleNum}`).classList.add('active-module');
+        document.querySelectorAll('#herbloom-womens-health .hb-tab-btn')[moduleNum - 1].classList.add('active');
+    }
+
+    // 1. Menstrual Tracker Logic
+    function calculateMenstrualTracker() {
+        let age = parseInt(document.getElementById('m-age').value) || 25;
+        let startDateVal = document.getElementById('m-start-date').value;
+        let cycleLen = parseInt(document.getElementById('m-cycle-length').value) || 28;
+        let durationLen = parseInt(document.getElementById('m-period-duration').value) || 5;
+
+        if (!startDateVal) {
+            alert("Please enter the last period start date.");
+            return;
+        }
+
+        let lastDate = new Date(startDateVal);
+        let nextPeriodDate = new Date(lastDate);
+        nextPeriodDate.setDate(lastDate.getDate() + cycleLen);
+
+        let ageNote = "";
+        if (age < 18) {
+            ageNote = "Adolescent HPO axis maturing; variable cycle lengths (21-45 days) can be normal.";
+        } else if (age >= 40) {
+            ageNote = "Perimenopausal transition phase; monitor for natural cycle fluctuations.";
+        } else {
+            ageNote = (cycleLen >= 26 && cycleLen <= 32) ? `Regular Adult Cycle (${durationLen}-day bleeding duration)` : `Monitored Cycle (${durationLen}-day duration)`;
+        }
+
+        let options = { year: 'numeric', month: 'short', day: 'numeric' };
+        document.getElementById('res-next-period').innerText = nextPeriodDate.toLocaleDateString(undefined, options);
+        document.getElementById('res-cycle-status').innerText = ageNote;
+        
+        document.getElementById('m-results').style.display = 'block';
+    }
+
+    // 2. Ovulation & Fertility Tracker Logic
+    function calculateFertility() {
+        let age = parseInt(document.getElementById('ov-age').value) || 30;
+        let startDateVal = document.getElementById('ov-last-date').value;
+        let cycleLen = parseInt(document.getElementById('ov-cycle-len').value) || 28;
+
+        if (!startDateVal) {
+            alert("Please enter the last period start date.");
+            return;
+        }
+
+        let lastDate = new Date(startDateVal);
+        let ovulationDayOffset = cycleLen - 14;
+        let ovulationDate = new Date(lastDate);
+        ovulationDate.setDate(lastDate.getDate() + ovulationDayOffset);
+
+        let fertileStart = new Date(ovulationDate);
+        fertileStart.setDate(ovulationDate.getDate() - 5);
+        let fertileEnd = new Date(ovulationDate);
+        fertileEnd.setDate(ovulationDate.getDate() + 1);
+
+        let fertilityNote = "Optimal natural fertility range.";
+        if (age >= 35 && age < 40) {
+            fertilityNote = "Age 35+: Gradual decline in ovarian reserve and oocyte quality.";
+        } else if (age >= 40) {
+            fertilityNote = "Age 40+: Steeper decline in natural conception rates; specialist consultation advised if trying to conceive.";
+        }
+
+        let options = { month: 'short', day: 'numeric' };
+        document.getElementById('res-ovulation-date').innerText = ovulationDate.toLocaleDateString(undefined, options);
+        document.getElementById('res-fertile-window').innerText = `${fertileStart.toLocaleDateString(undefined, options)} – ${fertileEnd.toLocaleDateString(undefined, options)}`;
+        document.getElementById('res-fertility-age-note').innerText = fertilityNote;
+        
+        document.getElementById('ov-results').style.display = 'block';
+    }
+
+    // 3. Pregnancy Tracker Logic
+    function calculatePregnancy() {
+        let age = parseInt(document.getElementById('p-age').value) || 30;
+        let lmpVal = document.getElementById('p-lmp').value;
+
+        if (!lmpVal) {
+            alert("Please enter the Last Menstrual Period (LMP) date.");
+            return;
+        }
+
+        let lmpDate = new Date(lmpVal);
+        let eddDate = new Date(lmpDate);
+        eddDate.setDate(lmpDate.getDate() + 280);
+
+        let today = new Date();
+        let diffTime = today - lmpDate;
+        let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+        
+        let weeks = Math.floor(diffDays / 7);
+        let days = diffDays % 7;
+        let gestationalStr = diffDays < 0 ? "Pre-conception / Future LMP" : `${weeks} weeks, ${days} days`;
+
+        let amaNote = age >= 35 ? "Advanced Maternal Age (AMA): Clinical monitoring recommended." : "Standard gestational monitoring profile.";
+
+        let options = { year: 'numeric', month: 'short', day: 'numeric' };
+        document.getElementById('res-edd').innerText = eddDate.toLocaleDateString(undefined, options);
+        document.getElementById('res-gestational-age').innerText = gestationalStr;
+        document.getElementById('res-ama-note').innerText = amaNote;
+
+        document.getElementById('p-results').style.display = 'block';
+    }
+
+    // 4. Delivery Date & Birth Preparation Planner Logic
+    function generateBirthPlan() {
+        let eddVal = document.getElementById('d-edd').value;
+
+        if (!eddVal) {
+            alert("Please enter the confirmed due date (EDD).");
+            return;
+        }
+
+        let eddDate = new Date(eddVal);
+        let today = new Date();
+        let diffTime = eddDate - today;
+        let diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        let countdownText = diffDays > 0 ? `${diffDays} days until estimated delivery` : "Due date reached or passed. Consult care provider.";
+        document.getElementById('res-countdown').innerText = countdownText;
+
+        document.getElementById('d-results').style.display = 'block';
+    }
+
+    // 5. Postpartum & Newborn Care Tracker Logic
+    function calculatePostpartum() {
+        let birthVal = document.getElementById('post-delivery-date').value;
+
+        if (!birthVal) {
+            alert("Please enter baby's birth date.");
+            return;
+        }
+
+        let birthDate = new Date(birthVal);
+        let today = new Date();
+        let diffTime = today - birthDate;
+        let diffDays = Math.floor(diffTime / (1000 * 60 * 60 * 24));
+
+        let timeStr = "";
+        if (diffDays < 0) {
+            timeStr = "Invalid future date";
+        } else if (diffDays === 0) {
+            timeStr = "Day 0 (Delivery Day)";
+        } else if (diffDays <= 42) {
+            let weeks = Math.floor(diffDays / 7);
+            let days = diffDays % 7;
+            timeStr = `${weeks} weeks, ${days} days postpartum`;
+        } else {
+            let months = (diffDays / 30.44).toFixed(1);
+            timeStr = `~${months} months postpartum`;
+        }
+
+        let careCheck = diffDays <= 42 ? "Schedule mandatory 6-week postpartum maternal checkup & neonatal pediatrician visit." : "Routine pediatric milestone tracking & ongoing maternal wellness support.";
+
+        document.getElementById('res-post-time').innerText = timeStr;
+        document.getElementById('res-post-guideline').innerText = careCheck;
+
+        document.getElementById('post-results').style.display = 'block';
+    }
+
+    // 6. Menopause & Hormonal Health Assessment Logic
+    function calculateMenopause() {
+        let age = parseInt(document.getElementById('men-age').value) || 50;
+        let status = document.getElementById('men-status').value;
+        let flashes = document.getElementById('men-flashes').value;
+
+        let stageDesc = "";
+        if (status === "Regular") {
+            stageDesc = "Premenopausal / Regular Hormonal Cycle";
+        } else if (status === "Perimenopause") {
+            stageDesc = `Perimenopausal transition phase (Flashes: ${flashes})`;
+        } else {
+            stageDesc = "Postmenopausal lifecycle stage";
+        }
+
+        document.getElementById('res-men-stage').innerText = stageDesc;
+        document.getElementById('men-results').style.display = 'block';
+    }
+</script>
+</body>
+</html>
